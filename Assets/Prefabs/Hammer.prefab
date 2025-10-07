@@ -120,9 +120,10 @@ GameObject:
   - component: {fileID: 8655899056012082640}
   - component: {fileID: 6304172358034862971}
   - component: {fileID: 6118995589533040353}
+  - component: {fileID: 4270908941714537271}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,3 +218,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4270908941714537271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4955527590763817740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b0f2e13f175f0469ee0eaf703fdb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targertObject: {fileID: 0}
+  rotationSpeed: 50

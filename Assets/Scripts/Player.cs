@@ -11,19 +11,21 @@ namespace SAE.GAD176.ProjectOne.Player
     /// </summary>
     public class Player : MonoBehaviour
     {
-        // [SerializeField] private float movementSpeed = 5f; 
+        private Rigidbody _rigidbody;
+        [SerializeField] private float movementSpeed = 5f; 
         [SerializeField] private GameObject usableItem;
-        private Transform parentObject;
 
         void Start()
         {
+            _rigidbody = GetComponent<Rigidbody>();
             ItemTransformPosition();
         }
         void Update()
         {
-            
+            playerMovement();
         }
-
+        #region "Attached prefab"
+        // function applies the prefab hammer object to the player and slightly offsets it
         public void ItemTransformPosition()
         {
             // instantiate the object as the prefab item
@@ -34,18 +36,28 @@ namespace SAE.GAD176.ProjectOne.Player
             
             // set the local position of the prefab offset by a bit
             instantiatedObject.transform.localPosition = new Vector3(-0.5f, 1f, 0);
+        }
+        #endregion
+        
+        #region "Player movement"
+        private void playerMovement()
+        {
+            float horizontalMovement = Input.GetAxis("Horizontal");
             
-            /* other code I was working on to get an understanding of the transform.position / parent
-             (it is very confusing for learning)
-             if (usableItem != null)
-            {
-                // logs to the console if the game object isn't null
-                Debug.Log("Usable Item Position: " + usableItem.transform.position);
+            Vector3 horizontalDirection = new Vector3(horizontalMovement, 0f, 0f).normalized;
+            
+            transform.position  += horizontalDirection * movementSpeed * 0.02f;
+            
+        }
+        #endregion
 
-                // sets the game object to be a child of this 'player' object
-                usableItem.transform.SetParent(this.transform);
+        // Looking at script to make a collision to update Health
+        public void OnCollisionEnter(Collision other)
+        {
+            if (other.GetComponent<IHealth>() != null)
+            {
+                other.GetComponent<IHealth>().ChangeHealth();
             }
-            */
         }
     }
 }
