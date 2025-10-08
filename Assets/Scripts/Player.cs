@@ -22,7 +22,7 @@ namespace SAE.GAD176.ProjectOne.Player
         }
         void Update()
         {
-            playerMovement();
+            PlayerMovement();
         }
         #region "Attached prefab"
         // function applies the prefab hammer object to the player and slightly offsets it
@@ -32,7 +32,7 @@ namespace SAE.GAD176.ProjectOne.Player
             GameObject instantiatedObject = Instantiate(usableItem);
             
             // make the instantiated item a child of the player object
-            instantiatedObject.transform.SetParent(this.transform);
+            instantiatedObject.transform.SetParent(transform);
             
             // set the local position of the prefab offset by a bit
             instantiatedObject.transform.localPosition = new Vector3(-0.5f, 1f, 0);
@@ -40,23 +40,23 @@ namespace SAE.GAD176.ProjectOne.Player
         #endregion
         
         #region "Player movement"
-        private void playerMovement()
+        private void PlayerMovement()
         {
             float horizontalMovement = Input.GetAxis("Horizontal");
             
             Vector3 horizontalDirection = new Vector3(horizontalMovement, 0f, 0f).normalized;
             
-            transform.position  += horizontalDirection * movementSpeed * 0.02f;
+            transform.position  += horizontalDirection * (movementSpeed * 0.02f);
             
         }
         #endregion
 
         // Looking at script to make a collision to update Health
-        public void OnCollisionEnter(Collision other)
+        public void OnCollisionEnter(Collision  collision)
         {
-            if (other.GetComponent<IHealth>() != null)
+            if (collision.gameObject.GetComponent<IHealth>() != null)
             {
-                other.GetComponent<IHealth>().ChangeHealth();
+                collision.gameObject.GetComponent<IHealth>().ChangeHealth();
             }
         }
     }
