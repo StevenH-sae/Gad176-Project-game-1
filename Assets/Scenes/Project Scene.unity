@@ -519,9 +519,7 @@ MonoBehaviour:
   usableItem: {fileID: 4955527590763817740, guid: f25864e09ce62cd4192f3a70fd2e36c7, type: 3}
   arrowLeft: 276
   arrowRight: 275
-  aKey: 97
-  dKey: 100
-  eKey: 101
+  Useitem: 256
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1259,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1218264662}
   - component: {fileID: 1218264661}
-  - component: {fileID: 1218264665}
   - component: {fileID: 1218264660}
   - component: {fileID: 1218264659}
   - component: {fileID: 1218264664}
@@ -1378,11 +1375,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 15
   usableItem: {fileID: 4955527590763817740, guid: f25864e09ce62cd4192f3a70fd2e36c7, type: 3}
-  arrowLeft: 276
-  arrowRight: 275
-  aKey: 97
-  dKey: 100
-  eKey: 101
+  arrowLeft: 97
+  arrowRight: 100
+  Useitem: 101
 --- !u!54 &1218264664
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1410,50 +1405,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1218264665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218264658}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
-  m_MaxPlayerCount: -1
-  m_AllowJoining: 1
-  m_JoinBehavior: 2
-  m_PlayerJoinedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_PlayerLeftEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_JoinAction:
-    m_UseReference: 0
-    m_Action:
-      m_Name: Join
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 5f4a4106-05fd-4339-8c34-a49c8814e68b
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 1218264658}
-  m_SplitScreen: 0
-  m_MaintainAspectRatioInSplitScreen: 0
-  m_FixedNumberOfSplitScreens: -1
-  m_SplitScreenRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
 --- !u!1 &1652170330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2093077148}
+  - component: {fileID: 2093077149}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -1746,6 +1698,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2093077149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093077147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d46c48f0cc6cf419d139ac01d9372c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 1
+  frequency: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
