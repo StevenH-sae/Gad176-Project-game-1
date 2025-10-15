@@ -26,10 +26,10 @@ public class Hammer : MonoBehaviour, IUseable
         //transform.Rotate(0f, 0f, 90f );
         //transform.DOScale(Vector3.zero, 3f);
         // I can see a problem in the direction the hammer will fall
-        transform.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 90), 1f).SetEase(Ease.OutBounce);
-        yield return new WaitForSeconds(2f);
+        transform.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 90), 0.5f).SetEase(Ease.OutBounce);
+        yield return new WaitForSeconds(1f);
         
-        transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), 1.5f);
+        transform.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 1.5f);
     }
     
     

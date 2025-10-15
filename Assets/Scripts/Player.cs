@@ -12,8 +12,10 @@ namespace SAE.GAD176.ProjectOne.Player
     public class Player : MonoBehaviour
     {
         private Rigidbody _rigidbody;
-        [SerializeField] private float movementSpeed = 5f; 
+        [SerializeField] private float movementSpeed = 15f; 
         [SerializeField] private GameObject usableItem;
+        public KeyCode arrowLeft = KeyCode.LeftArrow;
+        public KeyCode arrowRight = KeyCode.RightArrow;
 
         void Start()
         {
@@ -39,14 +41,14 @@ namespace SAE.GAD176.ProjectOne.Player
         }
         #endregion
         
-        #region "Player movement"
+        #region "Player Movement"
         private void PlayerMovement()
         {
-            float horizontalMovement = Input.GetAxis("Horizontal");
+            float horizontalMovement = Input.GetAxisRaw("Horizontal");
             
-            Vector3 horizontalDirection = new Vector3(horizontalMovement, 0f, 0f).normalized;
+            Vector3 velocity = new Vector3(horizontalMovement * movementSpeed, _rigidbody.linearVelocity.y, 0f);
             
-            transform.position  += horizontalDirection * (movementSpeed * 0.02f);
+            _rigidbody.linearVelocity = velocity;
             
         }
         #endregion
@@ -57,6 +59,11 @@ namespace SAE.GAD176.ProjectOne.Player
             if (collision.gameObject.GetComponent<IHealth>() != null)
             {
                 collision.gameObject.GetComponent<IHealth>().ChangeHealth();
+            }
+            
+            if (collision.gameObject.GetComponent<IUseable>() != null)
+            {
+                collision.gameObject.GetComponent<IUseable>().Use();
             }
         }
     }
