@@ -52,7 +52,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 6304172358034862971}
   - component: {fileID: 6118995589533040353}
   - component: {fileID: 4270908941714537271}
-  - component: {fileID: 7278787316353026258}
+  - component: {fileID: 4476248634212372845}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Hammer
@@ -163,7 +163,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b0f2e13f175f0469ee0eaf703fdb84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &7278787316353026258
+--- !u!54 &4476248634212372845
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,5 +256,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0

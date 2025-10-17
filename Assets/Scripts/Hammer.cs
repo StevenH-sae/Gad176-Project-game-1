@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -18,6 +19,4 @@ public class Hammer : MonoBehaviour, IUseable
         
         transform.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 1.5f);
     }
-    
-    
 }

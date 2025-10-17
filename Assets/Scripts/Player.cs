@@ -14,18 +14,17 @@ namespace SAE.GAD176.ProjectOne.Player
         private Rigidbody _rigidbody;
         
         [SerializeField] private float movementSpeed = 15f; 
-        [SerializeField] private GameObject usableItem;
         
         public KeyCode arrowLeft;
         public KeyCode arrowRight;
         public KeyCode Useitem;
         
         public IUseable heldObject;
+        [SerializeField] private Transform handSlot;
 
         void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
-            ItemTransformPosition();
         }
         void Update()
         {
@@ -44,21 +43,6 @@ namespace SAE.GAD176.ProjectOne.Player
                     heldObject.Use();
                 }
         }
-        
-        #region "Attached prefab"
-        // function applies the prefab hammer object to the player and slightly offsets it
-        public void ItemTransformPosition()
-        {
-            // instantiate the object as the prefab item
-            GameObject instantiatedObject = Instantiate(usableItem);
-            
-            // make the instantiated item a child of the player object
-            instantiatedObject.transform.SetParent(transform);
-            
-            // set the local position of the prefab offset by a bit
-            instantiatedObject.transform.localPosition = new Vector3(-0.5f, 1f, 0);
-        }
-        #endregion
         
         #region "Player Movement"
         private void PlayerMovement()
@@ -83,9 +67,25 @@ namespace SAE.GAD176.ProjectOne.Player
                 collision.gameObject.GetComponent<IHealth>().ChangeHealth();
             }
             
-            if (collision.gameObject.GetComponent<IUseable>() != null)
+            if (heldObject == null && collision.gameObject.GetComponent<IUseable>() != null)
             {
-                collision.gameObject.GetComponent<IUseable>().Use();
+                heldObject = collision.gameObject.GetComponent<IUseable>();
+                
+                collision.transform.SetParent(handSlot);
+                
+                collision.transform.localPosition = Vector2.zero;
+                collision.transform.localRotation = Quaternion.identity;
+                
+                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    Destroy(rb);
+                }
+                Collider col = collision.gameObject.GetComponent<Collider>();
+                if (col != null)
+                {
+                    col.enabled = false;
+                }
             }
         }
     }

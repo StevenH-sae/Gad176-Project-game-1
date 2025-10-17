@@ -1,9 +1,23 @@
+using System;
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public float amplitude = 1f;
-    public float frequency = 1f;
+    public float movementSpeed = 10f;
+    public float frequency = 2f;
+
+    [SerializeField] private GameObject spawnHammer;
+    
+    private Vector3 startPosition;
+
+    public void Start()
+    {
+        startPosition = transform.position;
+        StartCoroutine(SpawnHammer()); 
+    }
+    
     public void Update()
     {
         MoveWithCosine();
@@ -11,8 +25,20 @@ public class Spawner : MonoBehaviour
     
     void MoveWithCosine()
     {
-        // this will also move my cube, but it will move from left to right
-        float xPosition = (transform.position.x + amplitude) * Mathf.Sin(frequency);
-        transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
+        float xOffset = movementSpeed * Mathf.Cos(Time.time * frequency);
+        
+        transform.position = new Vector3(startPosition.x + xOffset, startPosition.y, startPosition.z);
+    }
+
+    public IEnumerator SpawnHammer()
+    {
+        while (true)
+        {
+            if (spawnHammer != null)
+            {
+                yield return new WaitForSeconds(7f);
+                Instantiate(spawnHammer, transform.position, Quaternion.identity);
+            }
+        }
     }
 }
