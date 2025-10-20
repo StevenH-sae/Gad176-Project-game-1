@@ -25,6 +25,7 @@ namespace SAE.GAD176.ProjectOne.Player
         [SerializeField] private Transform handSlot;
 
         [SerializeField] private bool isPlayerGrounded;
+        private bool facingRight = true;
 
         void Start()
         {
@@ -70,14 +71,37 @@ namespace SAE.GAD176.ProjectOne.Player
         private void PlayerMovement()
         {
             float horizontalMovement = 0f;
+            
 
             if(Input.GetKey(arrowLeft)) horizontalMovement -= 1f;
             if(Input.GetKey(arrowRight)) horizontalMovement += 1f;
+
+            if (horizontalMovement > 0 && !facingRight)
+            {
+                FlipToRight();
+            }
+
+            if (horizontalMovement < 0 && facingRight)
+            {
+                FlipToLeft();
+            }
             
             Vector3 velocity = new Vector3(horizontalMovement * movementSpeed, _rigidbody.linearVelocity.y, 0f);
             
             _rigidbody.linearVelocity = velocity;
             
+        }
+
+        private void FlipToRight()
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            facingRight = true;
+        }
+
+        private void FlipToLeft()
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            facingRight = false;
         }
         #endregion
 
