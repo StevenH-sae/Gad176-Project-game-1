@@ -438,7 +438,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -548,10 +548,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 15
+  jumpMomentum: 10
   arrowLeft: 276
   arrowRight: 275
-  Useitem: 256
+  useItem: 256
+  jumpKey: 273
   handSlot: {fileID: 834050859}
+  isPlayerGrounded: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,10 +1549,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 15
+  jumpMomentum: 10
   arrowLeft: 97
   arrowRight: 100
-  Useitem: 101
+  useItem: 101
+  jumpKey: 119
   handSlot: {fileID: 245231991}
+  isPlayerGrounded: 0
 --- !u!54 &1218264664
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1572,7 +1578,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -1670,6 +1676,10 @@ MonoBehaviour:
   movementSpeed: 11
   frequency: 2.5
   spawnHammer: {fileID: 4955527590763817740, guid: f25864e09ce62cd4192f3a70fd2e36c7, type: 3}
+  minSpawnDelay: 5
+  maxSpawnDelay: 10
+  warningTime: 2
+  maxHammerCount: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

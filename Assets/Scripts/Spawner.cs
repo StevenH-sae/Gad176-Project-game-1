@@ -11,7 +11,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject spawnHammer;
     
     private Vector3 startPosition;
+    
+    [SerializeField] private float minSpawnDelay = 5f;
+    [SerializeField] private float maxSpawnDelay = 10f;
+    [SerializeField] private float warningTime = 2f;
+    [SerializeField] private int maxHammerCount = 3;
 
+    private bool showWarningBox = false;
     public void Start()
     {
         startPosition = transform.position;
@@ -34,11 +40,33 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
+            float randomDelay = UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay);
+            float quietTime = randomDelay - warningTime;
+            
+            if(quietTime < 0) quietTime = 0;
+            yield return new WaitForSeconds(quietTime);
+            
+            showWarningBox = true;
+            yield return new WaitForSeconds(warningTime);
+            
             if (spawnHammer != null)
             {
-                yield return new WaitForSeconds(7f);
-                Instantiate(spawnHammer, transform.position, Quaternion.identity);
+                int hammerCount = FindObjectsOfType<Hammer>().Length;
+                if (hammerCount < maxHammerCount)
+                {
+                    Instantiate(spawnHammer, transform.position, Quaternion.identity);
+                }
             }
+            showWarningBox = false;
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        if (showWarningBox)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, 1f);
         }
     }
 }

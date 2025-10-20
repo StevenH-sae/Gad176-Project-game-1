@@ -13,14 +13,18 @@ namespace SAE.GAD176.ProjectOne.Player
     {
         private Rigidbody _rigidbody;
         
-        [SerializeField] private float movementSpeed = 15f; 
+        [SerializeField] private float movementSpeed = 15f;
+        [SerializeField] private float jumpMomentum = 8f;
         
         public KeyCode arrowLeft;
         public KeyCode arrowRight;
-        public KeyCode Useitem;
+        public KeyCode useItem;
+        public KeyCode jumpKey;
         
-        public IUseable heldObject;
+        private IUseable heldObject;
         [SerializeField] private Transform handSlot;
+
+        [SerializeField] private bool isPlayerGrounded;
 
         void Start()
         {
@@ -29,10 +33,16 @@ namespace SAE.GAD176.ProjectOne.Player
         void Update()
         {
             PlayerMovement();
-            if (Input.GetKey(Useitem))
+            HandleJump();
+            if (Input.GetKey(useItem))
             {
                 CheckUseItem();
             }
+        }
+
+        private void FixedUpdate()
+        {
+            isPlayerGrounded = Physics.Raycast(transform.position, Vector2.down, out RaycastHit hit,1.5f);
         }
 
         // Doorway to use our Hammer
@@ -43,7 +53,19 @@ namespace SAE.GAD176.ProjectOne.Player
                     heldObject.Use();
                 }
         }
-        
+
+        public void HandleJump()
+        {
+            if (isPlayerGrounded == true)
+            {
+                if (Input.GetKey(jumpKey))
+                {
+                    Vector3 currentVelocity = _rigidbody.linearVelocity;
+                    currentVelocity.y = jumpMomentum;
+                    _rigidbody.linearVelocity = currentVelocity;
+                }
+            }
+        }
         #region "Player Movement"
         private void PlayerMovement()
         {
@@ -67,15 +89,20 @@ namespace SAE.GAD176.ProjectOne.Player
                 collision.gameObject.GetComponent<IHealth>().ChangeHealth();
             }
             
+            // if the heldObject is null and the component is not null
+            // the heldObject variable is equeal to the IUseable
             if (heldObject == null && collision.gameObject.GetComponent<IUseable>() != null)
             {
                 heldObject = collision.gameObject.GetComponent<IUseable>();
                 
+                // set then heldObject as a child of a gameObject handslot
                 collision.transform.SetParent(handSlot);
                 
+                // transform the local position to 0,0,0
                 collision.transform.localPosition = Vector2.zero;
                 collision.transform.localRotation = Quaternion.identity;
                 
+                // as the prefab has a rigid body, I have it destroyed when the player grabs the item, so no issues occur
                 Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
