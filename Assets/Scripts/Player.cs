@@ -72,7 +72,7 @@ namespace SAE.GAD176.ProjectOne.Player
         {
             float horizontalMovement = 0f;
             
-
+            
             if(Input.GetKey(arrowLeft)) horizontalMovement -= 1f;
             if(Input.GetKey(arrowRight)) horizontalMovement += 1f;
 
@@ -90,6 +90,9 @@ namespace SAE.GAD176.ProjectOne.Player
             
             _rigidbody.linearVelocity = velocity;
             
+            //Vector3 moveDirection = new Vector3(horizontalMovement, 0, 0);
+            
+            //_rigidbody.AddForce(moveDirection * movementSpeed * 10, ForceMode.Force);
         }
 
         private void FlipToRight()
@@ -108,10 +111,6 @@ namespace SAE.GAD176.ProjectOne.Player
         // Looking at script to make a collision to update Health and if we walk into a hammer item to pick up
         public void OnCollisionEnter(Collision  collision)
         {
-            if (collision.gameObject.GetComponent<IHealth>() != null)
-            {
-                collision.gameObject.GetComponent<IHealth>().ChangeHealth();
-            }
             
             // if the heldObject is null and the component is not null
             // the heldObject variable is equeal to the IUseable

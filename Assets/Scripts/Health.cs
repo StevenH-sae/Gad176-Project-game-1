@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, IHealth
 {
-    [SerializeField] private int playerHealth = 30;
+    [SerializeField] private float maxHealth = 30f;
+    private float currentHealth;
 
-    public void ChangeHealth()
+    private void Start()
     {
-        // here will have the player health updated on if the hammer prefab collision with player
-        // this removes 10 health and knock player back
-        // if player health is == 0, player 'dies' and point goes to winner, a score script handles scores
-        Debug.Log("Players health is " + playerHealth);
-        
-        
+        currentHealth = maxHealth; 
     }
-    
+
+    public void ChangeHealth(float amount)
+    {
+        
+        currentHealth += amount;
+
+        Debug.Log(currentHealth);
+        Debug.Log($"{gameObject.name} now has {currentHealth} HP");
+    }
 }
