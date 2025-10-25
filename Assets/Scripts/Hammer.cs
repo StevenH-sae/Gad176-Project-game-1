@@ -16,7 +16,6 @@ public class Hammer : MonoBehaviour, IUseable
     
     public void Use()
     {
-        if (!canUse) return;
         StartCoroutine(Bash());
     }
     

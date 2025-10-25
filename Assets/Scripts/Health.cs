@@ -16,6 +16,5 @@ public class Health : MonoBehaviour, IHealth
         currentHealth += amount;
 
         Debug.Log(currentHealth);
-        Debug.Log($"{gameObject.name} now has {currentHealth} HP");
     }
 }
